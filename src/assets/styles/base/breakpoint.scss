@@ -1,0 +1,32 @@
+/*
+
+ブレイクポイントの設定
+
+使用の際は @include でセレクタ内に呼び出す。
+
+例）
+
+.hoge {
+  color: blue;
+  @include pc {
+    color: yellow;
+  }
+}
+
+*/
+
+/* PC版表示に切り替わるポイント */
+$pc: 768px;
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+
+/* タブレット縦表示で崩れている箇所に使用 */
+@mixin tablet {
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation : portrait) {
+    @content;
+  }
+}

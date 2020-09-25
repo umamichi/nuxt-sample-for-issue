@@ -1,0 +1,47 @@
+/*-------------------
+フォントファミリー設定
+---------------------*/
+html {
+  font-family: 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Hiragino Kaku Gothic ProN',
+               'ヒラギノ角ゴ ProN', 'Meiryo', 'メイリオ',
+                'MS PGothic', helvetica, sans-serif;
+  color: #000;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+
+/*-------------------
+フォントサイズ定数化
+---------------------*/
+$px8: 0.615rem;
+$px9: 0.692rem;
+$px10: 0.769rem;
+$px11: 0.846rem;
+$px12: 0.923rem;
+$px13: 1rem;
+$px14: 1.077rem;
+$px15: 1.154rem;
+$px16: 1.231rem;
+$px17: 1.308rem;
+$px18: 1.385rem;
+$px19: 1.462rem;
+$px20: 1.538rem;
+$px21: 1.615rem;
+$px22: 1.692rem;
+$px23: 1.769rem;
+$px24: 1.846rem;
+$px25: 1.923rem;
+$px26: 2rem;
+$px27: 2.077rem;
+$px28: 2.154rem;
+$px29: 2.231rem;
+$px30: 2.308rem;
+$px31: 2.385rem;
+$px32: 2.462rem;
+$px33: 2.583rem;
+$px34: 2.615rem;
+/*14.3px*/
+$px14_3: 1.1rem;
+/*16.9px*/
+$px16_9: 1.3rem;

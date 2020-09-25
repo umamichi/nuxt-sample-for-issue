@@ -1,0 +1,297 @@
+
+/*-------------------------------
+
+          セレクタ設定
+
+---------------------------------*/
+
+/*-----------------------------------------------------
+  本ファイルを修正する場合、同時に以下ファイルも修正すること
+  /app/stylesheets/preview/_common_preview.scss
+------------------------------------------------------*/
+
+/* <body> */
+//デフォルトで全体に改行プロパティ※改行したくない個所はkeep-allで上書き。
+body {
+  box-sizing: border-box;
+  word-break: break-all;
+  @include pc {
+    min-width: 1200px;
+  }
+}
+
+/* firefoxのみ適用 */
+@-moz-document url-prefix() {
+  body {
+    word-break: break-word;
+  }
+}
+
+/* <a> */
+//デフォルト設定
+a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  cursor: pointer;
+  -webkit-tap-highlight-color:rgba(0,0,0,0); //iOSデフォルトのリンクタッチカラー無効化
+}
+
+//マウスオーバーしたとき
+a:hover {
+  opacity: 0.7;
+}
+
+//リンク無効化クラス
+a.disabledLink {
+  pointer-events: none; /* aタグのリンクを無効にする */
+  cursor: default;  /* マウスオーバー時のカーソルをdefaultに固定 */
+}
+
+/* <img> */
+img {
+  display: block;
+}
+
+/* <label> */
+label {
+  -webkit-tap-highlight-color:rgba(0,0,0,0); //デフォルトのリンクタッチカラー無効化
+}
+
+/*フォントファミリー＆フォントサイズ引継ぎ*/
+button, input, select, textarea {
+  font-family:inherit;
+  font-size: 100%;
+}
+
+/* <input> */
+input {
+  appearance: none;//デフォルトスタイルリセット
+}
+
+//送信タイプとボタンタイプをマウスオーバーしたとき
+input[type=submit]:hover,
+input[type=button]:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+//デフォルトのチェックボックス非表示
+input[type=checkbox] {
+  display: none;
+}
+
+//デフォルトのラジオボタン非表示
+input[type=radio] {
+  display: none;
+}
+
+//デフォルトの×マーク非表示
+input::-ms-clear {
+  display: none;
+}
+
+//デフォルトの目のマーク非表示
+input::-ms-reveal {
+  display: none;
+}
+
+/* <textarea> */
+textarea {
+  appearance: none;//デフォルトスタイルリセット
+  resize: none;//右下斜線（リサイズマーク）消す※リサイズできなくする
+  overflow: auto;//IEでスクロールが必要ないときはスクロールバー非表示にする
+}
+
+/* focus時のスタイル */
+textarea:focus, input[type]:focus, select:focus {
+  box-shadow: 0 0 0 0.2rem #4287f5 inset;
+  outline: none;
+  border: none;
+}
+
+/* <button> */
+button {
+  appearance: none;//デフォルトスタイルリセット
+  padding: 0;
+  cursor: pointer;
+}
+
+//ボタンをマウスオーバーしたとき
+button:hover {
+  opacity: 0.7;
+}
+
+/* <select> */
+select {
+  color: rgb(155, 155, 155); // 追加
+  appearance: none;
+
+  // 選択状態のときに文字色を黒くする
+  &.selected {
+    color: rgb(0, 0, 0);
+  }
+
+  // デフォルト値
+  option.default {
+    color: rgb(155, 155, 155);
+  }
+
+  // 選択肢
+  option.choices {
+    color: rgb(0, 0, 0);
+  }
+
+  // Internet Explorer 10+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+/*---------------
+    shadow
+ ----------------*/
+
+/* 外側 */
+.shadow {
+  box-shadow: 0 2px 2px -1px $shadow;
+}
+
+/* 内側 */
+.shadowInset {
+  box-shadow: 0 2px 2px -1px $shadow inset;
+}
+
+/*------------------------
+コンテンツ表示・非表示クラス
+--------------------------*/
+
+/* sp:非表示　tablet/pc：表示 */
+.hideShow {
+  display: none;
+  @include pc {
+    display: block;
+  };
+}
+
+/* sp:表示　tablet/pc：非表示 */
+.showHide {
+  display: block;
+  @include pc {
+    display: none;
+  };
+}
+
+/*非表示クラス*/
+.hide {
+  display: none;
+}
+
+/*表示クラス*/
+.show {
+  display: block;
+}
+
+/*---------------
+  float 関連
+-----------------*/
+
+/* sp/tablet/pc(float 維持) */
+.floatL {
+  float: left;
+}
+
+.floatR {
+  float: right;
+}
+
+/* sp(float) → tablet/pc(float 解除) */
+.floatLSp {
+  float: left;
+  @include pc {
+    float: none;
+  };
+}
+
+.floatRSp {
+  float: right;
+  @include pc {
+    float: none;
+  };
+}
+
+/* sp(float 解除) → tablet/pc(float) */
+.floatLPc {
+  @include pc {
+    float: left;
+  };
+}
+
+.floatRPc {
+  @include pc {
+    float: right;
+  };
+}
+
+/* overflow */
+.overflowH {
+  overflow: hidden;
+}
+
+/*
+  clearfix
+  overflow: hidden; で
+  うまく処理できない場合などに使用
+  .overflowH の代わりに .clear を付与
+*/
+.clear::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/*-------------------------------------------------
+    三点リーダー処理
+
+※複数行用
+※文字超過で三点リーダー付与したい個所に追加付与
+※高さ指定必須
+※背景色によって付け分け
+---------------------------------------------------*/
+
+.ellipsisWhite,
+.ellipsisGray {
+  position: relative;
+  overflow: hidden;
+}
+
+.ellipsisWhite::before,
+.ellipsisWhite::after {
+  position: absolute;
+  background-color: #fff;
+}
+
+.ellipsisGray::before,
+.ellipsisGray::after {
+  position: absolute;
+  background-color: rgb(243, 243, 243);
+}
+
+.ellipsisWhite::before,
+.ellipsisGray::before {
+  content: "...";
+  bottom: 0;
+  right: 0px;
+}
+
+.ellipsisWhite::after,
+.ellipsisGray::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+}
+
+.zIndex9999 {
+  position: relative;
+  z-index: 9999;
+}
